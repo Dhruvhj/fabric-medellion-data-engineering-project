@@ -1,8 +1,7 @@
 # 🚀 Microsoft Fabric Medallion Architecture Project
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/02e4661d-8dc6-4565-ba69-cf3c43ce3ddb" />
 
-![Platform](https://img.shields.io/badge/Platform-Microsoft%20Fabric-0078D4?style=for-the-badge&logo=microsoft)
-![Architecture](https://img.shields.io/badge/Architecture-Medallion%20(Delta%20Lake)-000000?style=for-the-badge&logo=databricks)
-![Focus](https://img.shields.io/badge/Focus-PySpark%20%7C%20Data%20Modeling%20%7C%20CI%2FCD-FF6900?style=for-the-badge&logo=apachespark)
+
 
 This repository contains an end-to-end data engineering project using **Microsoft Fabric**, demonstrating the implementation of the **Medallion Architecture** (Bronze, Silver, Gold) to process and analyze structured and unstructured data for a mid-sized retail business, **Shopping Mart**.
 
