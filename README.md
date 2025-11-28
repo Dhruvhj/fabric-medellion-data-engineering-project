@@ -1,103 +1,91 @@
-Microsoft Fabric Medallion Architecture Project
+# 🚀 Microsoft Fabric Medallion Architecture Project
 
-<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8065af18-f580-49d0-b0df-fc6edae7e173" />
+![Platform](https://img.shields.io/badge/Platform-Microsoft%20Fabric-0078D4?style=for-the-badge&logo=microsoft)
+![Architecture](https://img.shields.io/badge/Architecture-Medallion%20(Delta%20Lake)-000000?style=for-the-badge&logo=databricks)
+![Focus](https://img.shields.io/badge/Focus-PySpark%20%7C%20Data%20Modeling%20%7C%20CI%2FCD-FF6900?style=for-the-badge&logo=apachespark)
 
-
-This repository contains an end-to-end data engineering project using Microsoft Fabric, demonstrating the implementation of the Medallion Architecture (Bronze, Silver, Gold) to process and analyze structured and unstructured data for a mid-sized retail business, Shopping Mart.
+This repository contains an end-to-end data engineering project using **Microsoft Fabric**, demonstrating the implementation of the **Medallion Architecture** (Bronze, Silver, Gold) to process and analyze structured and unstructured data for a mid-sized retail business, **Shopping Mart**.
 
 The project integrates Fabric Lakehouse, PySpark, and Power BI to build a modern data platform with scalable ingestion, transformation, and visualization pipelines.
 
-Project Overview
+---
 
-The goal of this project is to simulate a data platform for Shopping Mart to analyze sales, inventory, and social media/product review data to gain actionable insights and optimize inventory management.
+## 🎯 Project Overview
 
-Architecture
+The goal of this project is to simulate a robust data platform for **Shopping Mart** to unify sales, inventory, and social media/product review data. The outcome is a curated Gold layer that enables the business to gain actionable insights and optimize inventory management decisions.
 
-The project follows the Medallion Architecture:
+### Architectural Layers (Medallion Pattern)
 
-Bronze Layer – Raw data ingestion (CSV/JSON).
+* **Bronze Layer:** Raw data ingestion (CSV/JSON). Data is kept "as-is" for full auditability.
+* **Silver Layer:** Cleaned, validated, and integrated data (structured/unstructured). Focus on data quality.
+* **Gold Layer:** Business-ready, aggregated data for dimensional modeling and direct analytics consumption.
 
-Silver Layer – Cleaned and validated data (structured/unstructured).
+### Key Components
 
-Gold Layer – Business-ready aggregated data for analytics.
+* Microsoft Fabric Workspace
+* Fabric Lakehouses (Bronze, Silver, Gold)
+* PySpark Notebooks for complex transformations
+* Power BI Semantic Model and Dashboards
+* Master Orchestrator pipeline for end-to-end automation
 
-Key Components:
+---
 
-Microsoft Fabric Workspace
+## 🛠️ Data Ingestion & Transformation Pipeline
 
-Fabric Lakehouses (Bronze, Silver, Gold)
+### 📥 Bronze Layer: Scalable Ingestion
+* **Initial Manual Copy:** Simple ingestion of structured data (e.g., CSV) from a GitHub repository.
+* **Metadata-Driven Pipeline:** Utilizes a **JSON metadata file**, **Lookup**, and **ForEach** activities to dynamically automate the ingestion of multiple data sources (structured & unstructured).
 
-PySpark Notebooks for transformations
+### ✨ Silver Layer: Cleaning & Validation
+* **PySpark Transformations:** Applied for data cleaning, validation, and integration:
+    * Null handling and precise type casting (e.g., string to timestamp).
+    * Joining of structured data (orders, customers, products).
+    * Conversion of raw unstructured **JSON** data into query-optimized **Parquet** format.
+* **Storage Efficiency:** Shortcuts are used to reference Bronze data, preventing data duplication across layers.
 
-Power BI semantic model and dashboards
+### 🌟 Gold Layer: Aggregation & Consumption
+* **Aggregation:** Data is aggregated for business KPIs:
+    * Web engagement metrics by user action.
+    * Social sentiment analysis.
+    * Product review score aggregation.
+* **Delta Lake:** All final tables are written as **Delta Lake tables** to ensure ACID compliance and enable Power BI's Direct Lake connectivity.
 
-Master Orchestrator pipeline for end-to-end automation
+---
 
-Data Ingestion
-Bronze Layer
+## 📊 Modeling & Visualization
 
-Initial Manual Copy – Simple CSV ingestion from GitHub repository.
+### Semantic Model
+* Designed using a **Star Schema** with robust relationships between fact and dimension tables.
+* Includes a dedicated **Date Dimension Table** for comprehensive time-series analysis.
 
-Metadata-Driven Pipeline – Uses JSON metadata, Lookup, and ForEach activities to automate ingestion of multiple files (structured & unstructured).
+### Power BI Dashboard
+* **KPI Cards:** Total Sales, Products Sold.
+* **Slicers:** Interactive filters for Year, Month, Day, and Product Category.
+* **Visualizations:** Key charts for Sales Trend, Top Products, Review Ratings, and Social Sentiment analysis.
 
-Silver Layer
+---
 
-PySpark Transformations: Cleaning, validation, and integration.
+## ⚙️ Pipeline Orchestration
 
-Null handling, type casting, and joining structured data.
+The **Master Orchestrator pipeline** ensures the entire process runs reliably and sequentially:
+1.  Structured Data Ingestion
+2.  Unstructured Data Ingestion
+3.  Silver Transformations Notebook
+4.  Gold Transformations Notebook
 
-Converting unstructured JSON to Parquet for distributed storage.
+* **Automation:** Scheduling and failure notifications are implemented for production readiness.
 
-Silver shortcuts reference Bronze data without duplication.
+---
 
-Gold Layer
+## 💻 Technologies Used
 
-Aggregation of Silver-layer data for business KPIs:
+| Component | Technology | Role in Project |
+| :--- | :--- | :--- |
+| **Data Lake** | Microsoft Fabric Lakehouse | Unified storage for all Bronze/Silver/Gold layers (Delta Lake). |
+| **Compute Engine** | PySpark | High-performance ETL/ELT transformations. |
+| **Data Format** | Delta Lake | ACID compliance and optimized querying in the Gold layer. |
+| **Orchestration** | Fabric Data Pipeline | Metadata-driven ingestion and master workflow automation. |
+| **BI Tool** | Power BI | Data Modeling, Semantic Model, and visualization. |
+| **Metadata** | JSON | Configuration for dynamic ingestion. |
 
-Web engagement metrics
-
-Social sentiment analysis
-
-Product review aggregation
-
-Delta Lake tables created for Power BI direct connectivity.
-
-Modeling & Visualization
-
-Semantic Model: Relationships between fact and dimension tables.
-
-Date Dimension Table for time-series analysis.
-
-Power BI Dashboard:
-
-KPI Cards: Total Sales, Products Sold
-
-Slicers: Year, Month, Day, Product Category
-
-Visualizations: Sales Trend, Top Products, Review Ratings, Social Sentiment
-
-Pipeline Orchestration
-
-Master Orchestrator runs the full end-to-end pipeline:
-
-Structured Data Ingestion
-
-Unstructured Data Ingestion
-
-Silver Transformations Notebook
-
-Gold Transformations Notebook
-
-Scheduling and failure notifications implemented for automation.
-
-Technologies Used
-
-Microsoft Fabric Lakehouse
-
-PySpark (Data Transformations)
-
-Delta Lake (Gold Layer)
-
-Power BI (Semantic Model & Dashboard)
-
-JSON (Metadata-driven ingestion)
+---
